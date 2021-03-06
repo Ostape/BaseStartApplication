@@ -7,6 +7,12 @@ on:
     branches: [ master ]
 
 jobs:
+  ktlintCheck:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code style checking
+        run: ./gradlew ktlintCheck
+
   build:
 
     runs-on: ubuntu-latest
