@@ -14,5 +14,4 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             findNavController().navigate(R.id.action_homeFragment_to_testFragment)
         }
     }
-
 }
