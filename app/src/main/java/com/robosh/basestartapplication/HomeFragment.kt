@@ -9,7 +9,7 @@ import org.koin.android.ext.android.inject
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
-    val homePresenter: HomePresenter by inject()
+    private val homePresenter: HomePresenter by inject()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
