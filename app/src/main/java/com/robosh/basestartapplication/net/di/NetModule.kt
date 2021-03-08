@@ -9,11 +9,7 @@ import org.koin.dsl.module
 val netModule = module {
     factory { HomePresenter(get()) }
 
-
     single { RetrofitClientInstance.retrofitInstance }
 
-//        single { BookMapper() }
-//
     single<PhotoRepository> { PhotoRepositoryImpl(get()) }
-
 }
