@@ -8,4 +8,6 @@ interface PokemonApi {
 
     @GET("pokemon?limit=30&offset=30")
     suspend fun getPokemonsReference(): Response<PokemonListResponse>
+
+//    suspend fun getPokemon(): Response<>
 }
