@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.robosh.basestartapplication.HomeFragment"
+        android:name="com.robosh.basestartapplication.home.view.HomeFragment"
         android:label="HomeFragment">
         <action
             android:id="@+id/action_homeFragment_to_testFragment"
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailsBookNoteFragment"
-        android:name="com.robosh.basestartapplication.TestFragment"
+        android:name="com.robosh.basestartapplication.detail.DetailFragment"
         android:label="DetailsBookNoteFragment"
         app:enterAnim="@anim/slide_in_to_right"
         app:exitAnim="@anim/slide_out_to_left"
