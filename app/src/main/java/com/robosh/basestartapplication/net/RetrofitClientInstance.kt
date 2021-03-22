@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitClientInstance {
 
     private lateinit var retrofit: Retrofit
-    private const val BASE_URL = "https://api.unsplash.com/"
+    private const val BASE_URL = "https://pokeapi.co/api/v2/"
 
     val retrofitInstance: Retrofit
         get() {

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.robosh.basestartapplication.R
 import com.robosh.basestartapplication.databinding.ViewHolderPhotoBinding
-import com.robosh.basestartapplication.model.Photo
+import com.robosh.basestartapplication.net.model.PokemonListResponse
 import com.squareup.picasso.Picasso
 
 class PhotoViewHolder private constructor(
@@ -29,7 +29,7 @@ class PhotoViewHolder private constructor(
 
     private val binding: ViewHolderPhotoBinding = ViewHolderPhotoBinding.bind(view)
 
-    fun bind(photo: Photo) {
+    fun bind(photo: PokemonListResponse.PokemonReference) {
         with(binding) {
             Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(photoId)
 //            photoId.setOnClickListener(clickListener.createOnClickListener(photo))
