@@ -1,9 +1,10 @@
 package com.robosh.basestartapplication.net.repository
 
+import com.robosh.basestartapplication.model.Photo
 import com.robosh.basestartapplication.net.model.PhotoResponse
-import io.reactivex.Observable
+import retrofit2.Response
 
 interface PhotoRepository {
 
-    fun getPhotos(): Observable<List<PhotoResponse>>
+    suspend fun getPhotos(): Response<List<PhotoResponse>>
 }

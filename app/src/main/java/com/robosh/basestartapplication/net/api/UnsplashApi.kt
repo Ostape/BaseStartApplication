@@ -1,7 +1,7 @@
 package com.robosh.basestartapplication.net.api
 
 import com.robosh.basestartapplication.net.model.PhotoResponse
-import io.reactivex.Observable
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Headers
 
@@ -14,5 +14,5 @@ interface UnsplashApi {
 
     @GET("photos/")
     @Headers(AUTHORIZATION_HEADER)
-    fun getPhotos(): Observable<List<PhotoResponse>>
+    suspend fun getPhotos(): Response<List<PhotoResponse>>
 }
