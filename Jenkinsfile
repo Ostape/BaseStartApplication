@@ -4,7 +4,8 @@ pipeline {
         stage('Build') {
             steps {
               withGradle {
-                sh 'chmod +x ./gradlew test'
+                sh 'chmod +x ./gradlew'
+                sh './gradlew test'
               }
             }
         }
