@@ -1,18 +1,18 @@
 package com.robosh.basestartapplication.net.di
 
-import com.robosh.basestartapplication.home.presenter.HomePresenter
+import com.robosh.basestartapplication.home.presenter.HomeViewModel
 import com.robosh.basestartapplication.net.RetrofitClientInstance
 import com.robosh.basestartapplication.net.mapper.PhotoMapper
-import com.robosh.basestartapplication.net.repository.PhotoRepository
-import com.robosh.basestartapplication.net.repository.PhotoRepositoryImpl
+import com.robosh.basestartapplication.net.repository.PokemonRepository
+import com.robosh.basestartapplication.net.repository.PokemonRepositoryImpl
 import org.koin.dsl.module
 
 val netModule = module {
-    factory { HomePresenter(get()) }
+    factory { HomeViewModel(get()) }
 
     single { RetrofitClientInstance.retrofitInstance }
 
-    single<PhotoRepository> { PhotoRepositoryImpl(get()) }
+    single<PokemonRepository> { PokemonRepositoryImpl(get()) }
 
     single<PhotoMapper> { PhotoMapper() }
 }

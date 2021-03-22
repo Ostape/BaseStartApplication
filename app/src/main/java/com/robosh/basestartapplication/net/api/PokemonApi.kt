@@ -4,8 +4,8 @@ import com.robosh.basestartapplication.net.model.PokemonListResponse
 import retrofit2.Response
 import retrofit2.http.GET
 
-interface UnsplashApi {
+interface PokemonApi {
 
-    @GET("pokemon?limit=100&offset=200")
-    suspend fun getPhotos(): Response<PokemonListResponse>
+    @GET("pokemon?limit=30&offset=30")
+    suspend fun getPokemonsReference(): Response<PokemonListResponse>
 }

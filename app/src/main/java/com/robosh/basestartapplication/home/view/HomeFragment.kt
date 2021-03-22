@@ -5,17 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.robosh.basestartapplication.home.presenter.HomePresenter
-import com.robosh.basestartapplication.R
+import com.robosh.basestartapplication.home.presenter.HomeViewModel
 import com.robosh.basestartapplication.databinding.FragmentHomeBinding
-import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.android.ext.android.inject
 
 class HomeFragment : Fragment() {
 
-    private val homePresenter: HomePresenter by inject()
+    private val homeViewModel: HomeViewModel by inject()
     private lateinit var binding: FragmentHomeBinding
     private lateinit var bookNotesAdapter: PhotoAdapter
 
@@ -36,7 +33,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
-        homePresenter.aaaaa()
+        homeViewModel.aaaaa()
     }
 
     private fun initRecyclerView() {
