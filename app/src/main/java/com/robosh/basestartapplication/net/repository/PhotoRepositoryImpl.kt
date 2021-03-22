@@ -9,7 +9,7 @@ class PhotoRepositoryImpl(
     private val retrofit: Retrofit
 ) : PhotoRepository {
 
-    override suspend fun getPhotos(): Response<List<PokemonListResponse>> {
+    override suspend fun getPhotos(): Response<PokemonListResponse> {
         return retrofit.create(UnsplashApi::class.java).getPhotos()
     }
 }

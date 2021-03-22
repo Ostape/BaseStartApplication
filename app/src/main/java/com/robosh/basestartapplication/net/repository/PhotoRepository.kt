@@ -5,5 +5,5 @@ import retrofit2.Response
 
 interface PhotoRepository {
 
-    suspend fun getPhotos(): Response<List<PokemonListResponse>>
+    suspend fun getPhotos(): Response<PokemonListResponse>
 }
