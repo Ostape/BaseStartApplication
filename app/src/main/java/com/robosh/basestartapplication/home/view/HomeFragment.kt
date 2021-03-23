@@ -1,26 +1,27 @@
 package com.robosh.basestartapplication.home.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.robosh.basestartapplication.databinding.FragmentHomeBinding
 import com.robosh.basestartapplication.home.presenter.HomeViewModel
 import com.robosh.basestartapplication.model.MovieEvent
 import com.robosh.basestartapplication.model.MovieState
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import org.koin.android.ext.android.inject
 
 @ExperimentalCoroutinesApi
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
-    private val homeViewModel: HomeViewModel by inject()
+    private val homeViewModel: HomeViewModel by viewModels()
     private lateinit var binding: FragmentHomeBinding
     private lateinit var bookNotesAdapter: MovieAdapter
 

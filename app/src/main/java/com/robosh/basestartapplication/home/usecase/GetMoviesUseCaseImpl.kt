@@ -2,6 +2,7 @@ package com.robosh.basestartapplication.home.usecase
 
 import com.robosh.basestartapplication.model.MovieState
 import com.robosh.basestartapplication.net.RetrofitClientInstance
+import com.robosh.basestartapplication.net.api.MovieDbApi
 import com.robosh.basestartapplication.net.mapper.MovieMapper
 import com.robosh.basestartapplication.net.repository.MovieRepository
 import com.robosh.basestartapplication.net.repository.MovieRepositoryImpl
@@ -9,7 +10,7 @@ import com.robosh.basestartapplication.net.repository.MovieRepositoryImpl
 class GetMoviesUseCaseImpl : GetMoviesUseCase {
 
     private val movieRepository: MovieRepository =
-        MovieRepositoryImpl(RetrofitClientInstance.retrofitInstance)
+        MovieRepositoryImpl(RetrofitClientInstance.retrofitInstance.create(MovieDbApi::class.java))
     private val movieMapper = MovieMapper()
 
     override suspend fun execute(): MovieState {

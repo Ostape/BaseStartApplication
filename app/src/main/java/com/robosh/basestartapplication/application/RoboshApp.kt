@@ -1,24 +1,7 @@
 package com.robosh.basestartapplication.application
 
 import android.app.Application
-import com.robosh.basestartapplication.net.di.netModule
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
-import org.koin.core.context.startKoin
+import dagger.hilt.android.HiltAndroidApp
 
-class RoboshApp : Application() {
-
-    override fun onCreate() {
-        super.onCreate()
-
-        startKoin {
-            androidLogger()
-            androidContext(this@RoboshApp)
-            modules(
-                listOf(
-                    netModule
-                )
-            )
-        }
-    }
-}
+@HiltAndroidApp
+class RoboshApp : Application()

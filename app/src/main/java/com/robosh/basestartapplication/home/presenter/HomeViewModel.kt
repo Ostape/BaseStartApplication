@@ -2,22 +2,23 @@ package com.robosh.basestartapplication.home.presenter
 
 import android.util.Log
 import androidx.annotation.VisibleForTesting
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.robosh.basestartapplication.home.usecase.GetMoviesUseCase
 import com.robosh.basestartapplication.home.usecase.GetMoviesUseCaseImpl
 import com.robosh.basestartapplication.model.MovieEvent
 import com.robosh.basestartapplication.model.MovieState
-import com.robosh.basestartapplication.net.repository.MovieRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
-class HomeViewModel(private val movieRepository: MovieRepository) : ViewModel() {
+class HomeViewModel @Inject constructor() : ViewModel() {
 
     private val getMoviesUseCase: GetMoviesUseCase = GetMoviesUseCaseImpl()
 

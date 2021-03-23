@@ -3,13 +3,13 @@ package com.robosh.basestartapplication.net.repository
 import com.robosh.basestartapplication.net.api.MovieDbApi
 import com.robosh.basestartapplication.net.model.MovieListResponse
 import retrofit2.Response
-import retrofit2.Retrofit
+import javax.inject.Inject
 
-class MovieRepositoryImpl(
-    private val retrofit: Retrofit
+class MovieRepositoryImpl @Inject constructor(
+    private val movieDbApi: MovieDbApi
 ) : MovieRepository {
 
     override suspend fun getMovieListReference(): Response<MovieListResponse> {
-        return retrofit.create(MovieDbApi::class.java).getPopularMovieListReference()
+        return movieDbApi.getPopularMovieListReference()
     }
 }
