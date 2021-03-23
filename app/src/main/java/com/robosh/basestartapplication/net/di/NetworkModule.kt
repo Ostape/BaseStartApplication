@@ -2,16 +2,18 @@ package com.robosh.basestartapplication.net.di
 
 import com.robosh.basestartapplication.net.RetrofitClientInstance
 import com.robosh.basestartapplication.net.api.MovieDbApi
+import com.robosh.basestartapplication.net.repository.MovieRepository
+import com.robosh.basestartapplication.net.repository.MovieRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import javax.inject.Singleton
 
 @Module
-@InstallIn(ApplicationComponent::class)
-object AppModule {
+@InstallIn(SingletonComponent::class)
+object NetworkModule {
 
     @Singleton
     @Provides
@@ -20,4 +22,9 @@ object AppModule {
     @Singleton
     @Provides
     fun provideMovieDbApi(retrofit: Retrofit): MovieDbApi = retrofit.create(MovieDbApi::class.java)
+
+    @Singleton
+    @Provides
+    fun provideMovieRepository(movieRepositoryImpl: MovieRepositoryImpl): MovieRepository =
+        movieRepositoryImpl
 }

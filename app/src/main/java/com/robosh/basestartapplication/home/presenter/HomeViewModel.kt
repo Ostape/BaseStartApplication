@@ -2,13 +2,12 @@ package com.robosh.basestartapplication.home.presenter
 
 import android.util.Log
 import androidx.annotation.VisibleForTesting
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.robosh.basestartapplication.home.usecase.GetMoviesUseCase
-import com.robosh.basestartapplication.home.usecase.GetMoviesUseCaseImpl
 import com.robosh.basestartapplication.model.MovieEvent
 import com.robosh.basestartapplication.model.MovieState
+import com.robosh.basestartapplication.net.usecase.GetMoviesUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.consumeEach
@@ -18,9 +17,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
-class HomeViewModel @Inject constructor() : ViewModel() {
-
-    private val getMoviesUseCase: GetMoviesUseCase = GetMoviesUseCaseImpl()
+@HiltViewModel
+class HomeViewModel @Inject constructor(
+    private val getMoviesUseCase: GetMoviesUseCase
+) : ViewModel() {
 
     val intentChannel = Channel<MovieEvent>(Channel.UNLIMITED)
     private val _state = MutableStateFlow<MovieState>(MovieState.LoadingState)

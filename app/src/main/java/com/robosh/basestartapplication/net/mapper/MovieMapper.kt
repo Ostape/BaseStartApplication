@@ -2,8 +2,9 @@ package com.robosh.basestartapplication.net.mapper
 
 import com.robosh.basestartapplication.model.Movie
 import com.robosh.basestartapplication.net.model.MovieResponse
+import javax.inject.Inject
 
-class MovieMapper {
+class MovieMapper @Inject constructor() {
 
     fun map(movieListResponse: List<MovieResponse>): List<Movie> {
         val resultMovies = mutableListOf<Movie>()

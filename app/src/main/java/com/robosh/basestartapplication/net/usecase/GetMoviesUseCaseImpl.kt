@@ -1,17 +1,15 @@
-package com.robosh.basestartapplication.home.usecase
+package com.robosh.basestartapplication.net.usecase
 
 import com.robosh.basestartapplication.model.MovieState
-import com.robosh.basestartapplication.net.RetrofitClientInstance
-import com.robosh.basestartapplication.net.api.MovieDbApi
 import com.robosh.basestartapplication.net.mapper.MovieMapper
 import com.robosh.basestartapplication.net.repository.MovieRepository
-import com.robosh.basestartapplication.net.repository.MovieRepositoryImpl
+import com.robosh.basestartapplication.net.usecase.GetMoviesUseCase
+import javax.inject.Inject
 
-class GetMoviesUseCaseImpl : GetMoviesUseCase {
-
-    private val movieRepository: MovieRepository =
-        MovieRepositoryImpl(RetrofitClientInstance.retrofitInstance.create(MovieDbApi::class.java))
-    private val movieMapper = MovieMapper()
+class GetMoviesUseCaseImpl @Inject constructor(
+    private val movieRepository: MovieRepository,
+    private val movieMapper: MovieMapper
+) : GetMoviesUseCase {
 
     override suspend fun execute(): MovieState {
         val movieListResponse = movieRepository.getMovieListReference()
