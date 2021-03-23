@@ -23,11 +23,11 @@ class HomeFragment : Fragment() {
 
     private val homeViewModel: HomeViewModel by viewModels()
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var bookNotesAdapter: MovieAdapter
+    private lateinit var movieAdapter: MovieAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        bookNotesAdapter = MovieAdapter(null)
+        movieAdapter = MovieAdapter(null)
     }
 
     override fun onCreateView(
@@ -49,16 +49,16 @@ class HomeFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        with(binding.listOfBooksRecyclerView) {
+        with(binding.listOfMoviesRecyclerView) {
             setHasFixedSize(true)
-            adapter = bookNotesAdapter
+            adapter = movieAdapter
             layoutManager = LinearLayoutManager(this@HomeFragment.requireContext())
         }
     }
 
     private fun render(movieState: MovieState) {
         when (movieState) {
-            is MovieState.DataListState -> bookNotesAdapter.setData(movieState.data)
+            is MovieState.DataListState -> movieAdapter.setData(movieState.data)
         }
     }
 }

@@ -27,7 +27,7 @@
             tools:visibility="visible" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/listOfBooksRecyclerView"
+            android:id="@+id/list_of_movies_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:listitem="@layout/view_holder_movie" />
