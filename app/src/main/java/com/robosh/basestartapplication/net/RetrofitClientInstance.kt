@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitClientInstance {
 
     private lateinit var retrofit: Retrofit
-    private const val BASE_URL = "https://pokeapi.co/api/v2/"
+    private const val BASE_URL = "https://api.themoviedb.org/3/"
 
     val retrofitInstance: Retrofit
         get() {

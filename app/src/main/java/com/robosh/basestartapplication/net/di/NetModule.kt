@@ -2,9 +2,9 @@ package com.robosh.basestartapplication.net.di
 
 import com.robosh.basestartapplication.home.presenter.HomeViewModel
 import com.robosh.basestartapplication.net.RetrofitClientInstance
-import com.robosh.basestartapplication.net.mapper.PhotoMapper
-import com.robosh.basestartapplication.net.repository.PokemonRepository
-import com.robosh.basestartapplication.net.repository.PokemonRepositoryImpl
+import com.robosh.basestartapplication.net.mapper.MovieMapper
+import com.robosh.basestartapplication.net.repository.MovieRepository
+import com.robosh.basestartapplication.net.repository.MovieRepositoryImpl
 import org.koin.dsl.module
 
 val netModule = module {
@@ -12,7 +12,7 @@ val netModule = module {
 
     single { RetrofitClientInstance.retrofitInstance }
 
-    single<PokemonRepository> { PokemonRepositoryImpl(get()) }
+    single<MovieRepository> { MovieRepositoryImpl(get()) }
 
-    single<PhotoMapper> { PhotoMapper() }
+    single<MovieMapper> { MovieMapper() }
 }

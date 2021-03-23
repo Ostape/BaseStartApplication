@@ -2,13 +2,13 @@ package com.robosh.basestartapplication.home.view
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.robosh.basestartapplication.net.model.PokemonListResponse
+import com.robosh.basestartapplication.net.model.MovieListResponse
 
 class PhotoAdapter(
     private val clickListener: PhotoClickListenerFactory?
 ) : RecyclerView.Adapter<PhotoViewHolder>() {
 
-    private val photos = ArrayList<PokemonListResponse>()
+    private val photos = ArrayList<MovieListResponse>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder {
         return PhotoViewHolder.create(parent, clickListener)
@@ -20,7 +20,7 @@ class PhotoAdapter(
 //        holder.bind(photos[position])
     }
 
-    fun setData(list: List<PokemonListResponse>) {
+    fun setData(list: List<MovieListResponse>) {
         photos.clear()
         photos.addAll(list)
         notifyDataSetChanged()

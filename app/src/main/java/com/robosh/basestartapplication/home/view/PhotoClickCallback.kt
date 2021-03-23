@@ -1,8 +1,8 @@
 package com.robosh.basestartapplication.home.view
 
-import com.robosh.basestartapplication.net.model.PokemonListResponse
+import com.robosh.basestartapplication.net.model.MovieListResponse
 
 interface PhotoClickCallback {
 
-    fun onBookClicked(photo: PokemonListResponse)
+    fun onBookClicked(photo: MovieListResponse)
 }
