@@ -13,7 +13,8 @@ class MovieMapper {
                     it.id,
                     it.title,
                     it.description,
-                    it.posterPath
+                    it.posterPath,
+                    it.date
                 )
             )
         }

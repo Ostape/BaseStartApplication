@@ -22,11 +22,11 @@ class HomeFragment : Fragment() {
 
     private val homeViewModel: HomeViewModel by inject()
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var bookNotesAdapter: PhotoAdapter
+    private lateinit var bookNotesAdapter: MovieAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        bookNotesAdapter = PhotoAdapter(null)
+        bookNotesAdapter = MovieAdapter(null)
     }
 
     override fun onCreateView(
@@ -56,6 +56,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun render(movieState: MovieState) {
-        Log.d("TAGGER in Fragment", movieState.toString())
+        when (movieState) {
+            is MovieState.DataListState -> bookNotesAdapter.setData(movieState.data)
+        }
     }
 }
