@@ -1,15 +1,23 @@
 package com.robosh.basestartapplication.home.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.robosh.basestartapplication.home.presenter.HomeViewModel
 import com.robosh.basestartapplication.databinding.FragmentHomeBinding
+import com.robosh.basestartapplication.home.presenter.HomeViewModel
+import com.robosh.basestartapplication.model.MovieEvent
+import com.robosh.basestartapplication.model.MovieState
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.android.ext.android.inject
 
+@ExperimentalCoroutinesApi
 class HomeFragment : Fragment() {
 
     private val homeViewModel: HomeViewModel by inject()
@@ -33,7 +41,10 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
-        homeViewModel.aaaaa()
+        homeViewModel.state.onEach {
+            render(it)
+        }.launchIn(lifecycleScope)
+        homeViewModel.intentChannel.offer(MovieEvent.MoviesFetch)
     }
 
     private fun initRecyclerView() {
@@ -42,5 +53,9 @@ class HomeFragment : Fragment() {
             adapter = bookNotesAdapter
             layoutManager = LinearLayoutManager(this@HomeFragment.requireContext())
         }
+    }
+
+    private fun render(movieState: MovieState) {
+        Log.d("TAGGER in Fragment", movieState.toString())
     }
 }
