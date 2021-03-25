@@ -8,12 +8,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.work.OneTimeWorkRequest
+import com.robosh.basestartapplication.R
 import com.robosh.basestartapplication.databinding.FragmentHomeBinding
 import com.robosh.basestartapplication.home.presenter.HomeViewModel
 import com.robosh.basestartapplication.model.Movie
 import com.robosh.basestartapplication.model.MovieEvent
 import com.robosh.basestartapplication.model.MovieState
+import com.robosh.basestartapplication.workmanager.MovieSchedulerWorkManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.launchIn
@@ -48,6 +52,9 @@ class HomeFragment : Fragment(), MovieClickCallback {
             render(it)
         }.launchIn(lifecycleScope)
         homeViewModel.intentChannel.offer(MovieEvent.MoviesFetch)
+
+        val builder = OneTimeWorkRequest.Builder(MovieSchedulerWorkManager::class.java)
+//        builder.setInputMerger()
     }
 
     private fun initRecyclerView() {
@@ -65,6 +72,7 @@ class HomeFragment : Fragment(), MovieClickCallback {
     }
 
     override fun onMovieRemindClicked(movie: Movie) {
+        findNavController().navigate(R.id.action_homeFragment_to_testFragment)
         Log.d("TAGGERR", movie.toString())
     }
 }

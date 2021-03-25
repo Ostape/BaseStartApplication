@@ -1,8 +1,10 @@
 package com.robosh.basestartapplication.net.api
 
 import com.robosh.basestartapplication.net.model.MovieListResponse
+import com.robosh.basestartapplication.net.model.MovieResponse
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 interface MovieDbApi {
 
@@ -17,4 +19,7 @@ interface MovieDbApi {
 
     @GET(QUERY_POPULAR_MOVIES)
     suspend fun getPopularMovieListReference(): Response<MovieListResponse>
+
+    @GET("movie/{movie_id}$API_KEY_QUERY")
+    suspend fun getMovieById(@Path("movie_id") movieId: Int): Response<MovieResponse>
 }
