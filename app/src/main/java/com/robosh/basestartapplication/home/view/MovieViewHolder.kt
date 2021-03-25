@@ -12,13 +12,13 @@ import com.squareup.picasso.Picasso
 
 class MovieViewHolder private constructor(
     view: View,
-    private val clickListener: PhotoClickListenerFactory?
+    private val clickListener: MovieClickListenerFactory
 ) : RecyclerView.ViewHolder(view) {
 
     companion object {
         fun create(
             parent: ViewGroup,
-            clickListener: PhotoClickListenerFactory?
+            clickListener: MovieClickListenerFactory
         ): MovieViewHolder {
             return MovieViewHolder(
                 LayoutInflater.from(parent.context)
@@ -30,13 +30,13 @@ class MovieViewHolder private constructor(
 
     private val binding: ViewHolderMovieBinding = ViewHolderMovieBinding.bind(view)
 
-    fun bind(photo: Movie) {
+    fun bind(movie: Movie) {
         with(binding) {
-            Picasso.get().load(IMAGE_BASE_URL + photo.posterUrl).into(movieImage)
-            movieTitle.text = photo.title
-            movieDescription.text = photo.description
-            movieDate.text = photo.date
-//            photoId.setOnClickListener(clickListener.createOnClickListener(photo))
+            Picasso.get().load(IMAGE_BASE_URL + movie.posterUrl).into(movieImage)
+            movieTitle.text = movie.title
+            movieDescription.text = movie.description
+            movieDate.text = movie.date
+            remindButton.setOnClickListener(clickListener.createOnClickListener(movie))
         }
     }
 }

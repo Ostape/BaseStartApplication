@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.robosh.basestartapplication.model.Movie
 
 class MovieAdapter(
-    private val clickListener: PhotoClickListenerFactory?
+    private val clickListener: MovieClickListenerFactory
 ) : RecyclerView.Adapter<MovieViewHolder>() {
 
     private val photos = ArrayList<Movie>()

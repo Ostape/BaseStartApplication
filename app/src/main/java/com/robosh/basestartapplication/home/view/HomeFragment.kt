@@ -1,6 +1,7 @@
 package com.robosh.basestartapplication.home.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.robosh.basestartapplication.databinding.FragmentHomeBinding
 import com.robosh.basestartapplication.home.presenter.HomeViewModel
+import com.robosh.basestartapplication.model.Movie
 import com.robosh.basestartapplication.model.MovieEvent
 import com.robosh.basestartapplication.model.MovieState
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,9 +19,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
-@ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), MovieClickCallback {
 
     private val homeViewModel: HomeViewModel by viewModels()
     private lateinit var binding: FragmentHomeBinding
@@ -27,7 +28,7 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        movieAdapter = MovieAdapter(null)
+        movieAdapter = MovieAdapter(MovieClickListenerFactoryImpl(this))
     }
 
     override fun onCreateView(
@@ -39,6 +40,7 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
@@ -60,5 +62,9 @@ class HomeFragment : Fragment() {
         when (movieState) {
             is MovieState.DataListState -> movieAdapter.setData(movieState.data)
         }
+    }
+
+    override fun onMovieRemindClicked(movie: Movie) {
+        Log.d("TAGGERR", movie.toString())
     }
 }

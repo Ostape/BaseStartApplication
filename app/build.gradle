@@ -41,6 +41,7 @@ android {
 }
 
 def nav_version = "2.3.1"
+def work_version = "2.5.0"
 
 dependencies {
 
@@ -87,4 +88,7 @@ dependencies {
 
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
     kapt "androidx.hilt:hilt-compiler:1.0.0-beta01"
+
+    // Kotlin + coroutines
+    implementation "androidx.work:work-runtime-ktx:$work_version"
 }
