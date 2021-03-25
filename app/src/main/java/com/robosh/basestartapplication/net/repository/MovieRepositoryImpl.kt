@@ -15,6 +15,6 @@ class MovieRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getMovieById(movieId: Int): Response<MovieResponse> {
-        return movieDbApi.getMovieById(100)
+        return movieDbApi.getMovieById(movieId)
     }
 }

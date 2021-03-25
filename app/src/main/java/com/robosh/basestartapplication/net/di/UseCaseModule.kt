@@ -2,6 +2,8 @@ package com.robosh.basestartapplication.net.di
 
 import com.robosh.basestartapplication.net.usecase.GetMoviesUseCase
 import com.robosh.basestartapplication.net.usecase.GetMoviesUseCaseImpl
+import com.robosh.basestartapplication.net.usecase.GetOneMovieUseCase
+import com.robosh.basestartapplication.net.usecase.GetOneMovieUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,4 +18,9 @@ object UseCaseModule {
     @ViewModelScoped
     fun provideGetMoviesUseCase(getMoviesUseCaseImpl: GetMoviesUseCaseImpl): GetMoviesUseCase =
         getMoviesUseCaseImpl
+
+    @Provides
+    @ViewModelScoped
+    fun provideGetMoviesUseCase(getOneMovieUseCaseImpl: GetOneMovieUseCaseImpl): GetOneMovieUseCase =
+        getOneMovieUseCaseImpl
 }
