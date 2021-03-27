@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.robosh.basestartapplication.application.INTENT_MOVIE_KEY
 import com.robosh.basestartapplication.databinding.FragmentHomeBinding
 import com.robosh.basestartapplication.home.presenter.HomeViewModel
 import com.robosh.basestartapplication.model.Movie
@@ -75,14 +76,20 @@ class HomeFragment : Fragment(), MovieClickCallback {
         val instance = Calendar.getInstance()
         instance.set(Calendar.MINUTE, instance.get(Calendar.MINUTE))
         instance.set(Calendar.SECOND, instance.get(Calendar.SECOND) + 10)
-        startAlarm(instance)
+        startAlarm(instance, movie)
     }
 
-    private fun startAlarm(calendar: Calendar) {
+    private fun startAlarm(
+        calendar: Calendar,
+        movie: Movie
+    ) {
         val manager = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val pendingIntent: PendingIntent
 
         val myIntent = Intent(requireContext(), AlarmNotificationReceiver::class.java)
+        myIntent.putExtra(INTENT_MOVIE_KEY + "1", Bundle().apply {
+            putParcelable(INTENT_MOVIE_KEY, movie)
+        })
         pendingIntent = PendingIntent.getBroadcast(requireContext(), 0, myIntent, 0)
 
         Log.d("TAGGGG", calendar.timeInMillis.toString())

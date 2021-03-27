@@ -17,6 +17,8 @@ import androidx.core.content.ContextCompat.getSystemService
 import androidx.navigation.NavDeepLinkBuilder
 import com.robosh.basestartapplication.BrowseActivity
 import com.robosh.basestartapplication.R
+import com.robosh.basestartapplication.application.INTENT_MOVIE_KEY
+import com.robosh.basestartapplication.model.Movie
 
 
 // TODO BTW: replace constants in xml
@@ -24,12 +26,12 @@ import com.robosh.basestartapplication.R
 class AlarmNotificationReceiver : BroadcastReceiver() {
 
     companion object {
-        const val CHANNEL_ID= "CHANNEL_ID";
+        const val CHANNEL_ID = "CHANNEL_ID";
     }
-    override fun onReceive(context: Context, intent: Intent) {
-        // todo add notification channel
-        Log.d("TAGEERRR", "AlarmNotificationReceiver")
 
+    override fun onReceive(context: Context, intent: Intent) {
+        Log.d("TAGEERRR", "AlarmNotificationReceiver")
+        Log.d("TAGEERRR", "arguments: ${intent.getBundleExtra(INTENT_MOVIE_KEY+"1")?.getParcelable<Movie>(INTENT_MOVIE_KEY)}")
         showNotification(context)
     }
 
@@ -61,7 +63,8 @@ class AlarmNotificationReceiver : BroadcastReceiver() {
             mChannel.description = descriptionText
             // Register the channel with the system; you can't change the importance
             // or other notification behaviors after this
-            val notificationManager = context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+            val notificationManager =
+                context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(mChannel)
         }
 
