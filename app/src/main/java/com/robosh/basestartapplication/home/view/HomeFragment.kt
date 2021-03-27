@@ -118,11 +118,17 @@ class HomeFragment : Fragment(), MovieClickCallback {
         movie: Movie
     ) {
         val manager = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val pendingIntent: PendingIntent
-
-        val myIntent = Intent(requireContext(), AlarmNotificationReceiver::class.java)
-        myIntent.putExtra(INTENT_MOVIE_KEY, movie.id)
-        pendingIntent = PendingIntent.getBroadcast(requireContext(), 0, myIntent, 0)
+        val alarmNotificationIntent =
+            Intent(requireContext(), AlarmNotificationReceiver::class.java).apply {
+                putExtra(INTENT_MOVIE_KEY, movie.id)
+            }
+        val pendingIntent =
+            PendingIntent.getBroadcast(
+                requireContext(),
+                0,
+                alarmNotificationIntent,
+                PendingIntent.FLAG_ONE_SHOT
+            )
 
         Log.d("TAGGGG", calendar.timeInMillis.toString())
         Log.d("TAGGGG", System.currentTimeMillis().toString())
