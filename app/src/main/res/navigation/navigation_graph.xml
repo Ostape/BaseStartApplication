@@ -9,15 +9,15 @@
         android:name="com.robosh.basestartapplication.home.view.HomeFragment"
         android:label="HomeFragment">
         <action
-            android:id="@+id/action_homeFragment_to_testFragment"
-            app:destination="@id/detailsBookNoteFragment"
+            android:id="@+id/action_homeFragment_to_detailsMovieFragment"
+            app:destination="@id/detailsMovieFragment"
             app:enterAnim="@anim/slide_in_to_right"
             app:exitAnim="@anim/slide_out_to_left"
             app:popEnterAnim="@anim/slide_in_from_left"
             app:popExitAnim="@anim/slide_out_to_right" />
     </fragment>
     <fragment
-        android:id="@+id/detailsBookNoteFragment"
+        android:id="@+id/detailsMovieFragment"
         android:name="com.robosh.basestartapplication.detail.view.DetailFragment"
         android:label="DetailsBookNoteFragment"
         app:enterAnim="@anim/slide_in_to_right"

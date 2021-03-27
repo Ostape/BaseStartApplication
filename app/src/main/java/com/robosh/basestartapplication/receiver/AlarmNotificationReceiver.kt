@@ -35,7 +35,7 @@ class AlarmNotificationReceiver : BroadcastReceiver() {
         val pendingIntent = NavDeepLinkBuilder(context)
             .setComponentName(BrowseActivity::class.java)
             .setGraph(R.navigation.navigation_graph)
-            .setDestination(R.id.detailsBookNoteFragment)
+            .setDestination(R.id.detailsMovieFragment)
             .setArguments(Bundle().apply { this.putInt(INTENT_MOVIE_KEY, movieId) })
             .createPendingIntent()
 
