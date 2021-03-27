@@ -21,6 +21,6 @@ object UseCaseModule {
 
     @Provides
     @ViewModelScoped
-    fun provideGetMoviesUseCase(getOneMovieUseCaseImpl: GetOneMovieUseCaseImpl): GetOneMovieUseCase =
+    fun provideGetOneMovieUseCase(getOneMovieUseCaseImpl: GetOneMovieUseCaseImpl): GetOneMovieUseCase =
         getOneMovieUseCaseImpl
 }
