@@ -2,6 +2,7 @@ package com.robosh.basestartapplication.receiver
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Context.NOTIFICATION_SERVICE
@@ -17,12 +18,10 @@ import com.robosh.basestartapplication.R
 import com.robosh.basestartapplication.application.INTENT_MOVIE_KEY
 
 
-// TODO BTW: replace constants in xml
-
 class AlarmNotificationReceiver : BroadcastReceiver() {
 
-    companion object {
-        const val CHANNEL_ID = "CHANNEL_ID";
+    private companion object {
+        const val CHANNEL_ID = "CHANNEL_ID"
     }
 
     override fun onReceive(context: Context, intent: Intent) {
@@ -31,41 +30,51 @@ class AlarmNotificationReceiver : BroadcastReceiver() {
     }
 
     private fun showNotification(context: Context, movieId: Int) {
+        val pendingIntent = createPendingIntent(context, movieId)
+        val builder = createNotificationBuilder(context, pendingIntent)
+        createNotificationChannel(context)
+        with(NotificationManagerCompat.from(context)) {
+            notify(1, builder.build())
+        }
+    }
 
-        val pendingIntent = NavDeepLinkBuilder(context)
+    private fun createNotificationBuilder(
+        context: Context,
+        pendingIntent: PendingIntent
+    ): NotificationCompat.Builder {
+        return NotificationCompat.Builder(context, CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_launcher_background)
+            .setContentTitle(context.getString(R.string.movie_picker))
+            .setContentText(context.getString(R.string.movie_notification_description))
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
+    }
+
+    private fun createPendingIntent(
+        context: Context,
+        movieId: Int
+    ): PendingIntent {
+        return NavDeepLinkBuilder(context)
             .setComponentName(BrowseActivity::class.java)
             .setGraph(R.navigation.navigation_graph)
             .setDestination(R.id.detailsMovieFragment)
-            .setArguments(Bundle().apply { this.putInt(INTENT_MOVIE_KEY, movieId) })
+            .setArguments(Bundle().apply { putInt(INTENT_MOVIE_KEY, movieId) })
             .createPendingIntent()
+    }
 
-
-        val builder = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_launcher_background)
-            .setContentTitle("My notification")
-            .setContentText("Hello World!")
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            // Set the intent that will fire when the user taps the notification
-            .setContentIntent(pendingIntent)
-            .setAutoCancel(true)
-
+    private fun createNotificationChannel(context: Context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // Create the NotificationChannel
-            val name = "Notification Channel"
-            val descriptionText = "etString(R.string.channel_description)"
             val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val mChannel = NotificationChannel(CHANNEL_ID, name, importance)
-            mChannel.description = descriptionText
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
+            val notificationChannel = NotificationChannel(
+                CHANNEL_ID,
+                context.getString(R.string.channel_name),
+                importance
+            )
+            notificationChannel.description = context.getString(R.string.channel_description)
             val notificationManager =
                 context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(mChannel)
-        }
-
-        with(NotificationManagerCompat.from(context)) {
-            // notificationId is a unique int for each notification that you must define
-            notify(1, builder.build())
+            notificationManager.createNotificationChannel(notificationChannel)
         }
     }
 }
