@@ -1,12 +1,14 @@
 package com.robosh.basestartapplication.detail.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.robosh.basestartapplication.application.INTENT_MOVIE_KEY
 import com.robosh.basestartapplication.databinding.FragmentDetailBinding
 import com.robosh.basestartapplication.detail.presenter.DetailViewModel
 import com.robosh.basestartapplication.model.MovieEvent
@@ -39,7 +41,9 @@ class DetailFragment : Fragment() {
         detailViewModel.state.onEach {
             render(it)
         }.launchIn(lifecycleScope)
-        detailViewModel.intentChannel.offer(MovieEvent.MoviesFetch)
+        arguments?.getInt(INTENT_MOVIE_KEY)?.let {
+            detailViewModel.intentChannel.offer(MovieEvent.MovieNotified(it))
+        }
     }
 
     private fun render(movieState: MovieState) {

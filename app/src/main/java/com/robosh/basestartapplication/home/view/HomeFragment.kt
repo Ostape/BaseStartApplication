@@ -87,16 +87,18 @@ class HomeFragment : Fragment(), MovieClickCallback {
         val pendingIntent: PendingIntent
 
         val myIntent = Intent(requireContext(), AlarmNotificationReceiver::class.java)
-        myIntent.putExtra(INTENT_MOVIE_KEY + "1", Bundle().apply {
-            putParcelable(INTENT_MOVIE_KEY, movie)
-        })
+        myIntent.putExtra(INTENT_MOVIE_KEY, movie.id)
         pendingIntent = PendingIntent.getBroadcast(requireContext(), 0, myIntent, 0)
 
         Log.d("TAGGGG", calendar.timeInMillis.toString())
         Log.d("TAGGGG", System.currentTimeMillis().toString())
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            manager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
+            manager.setExactAndAllowWhileIdle(
+                AlarmManager.RTC_WAKEUP,
+                calendar.timeInMillis,
+                pendingIntent
+            )
         } else {
             manager.setExact(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
         }

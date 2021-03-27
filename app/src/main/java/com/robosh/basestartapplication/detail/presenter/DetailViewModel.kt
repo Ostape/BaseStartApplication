@@ -37,9 +37,8 @@ class DetailViewModel @Inject constructor(
     suspend fun obtainEvent() {
         intentChannel.consumeEach { movieEvent ->
             when (movieEvent) {
-                is MovieEvent.MoviesFetch -> {
-                    Log.d("TAGGERR", getOneMovieUseCase.execute(100).toString())
-                    _state.value = getOneMovieUseCase.execute(100)
+                is MovieEvent.MovieNotified -> {
+                    _state.value = getOneMovieUseCase.execute(movieEvent.id)
                 }
 //                is BookNoteEvent.BookNoteClicked -> {
 //                    _state.value = BookNoteState.BookNoteClickedState(bookNoteEvent.bookNote)

@@ -1,24 +1,20 @@
 package com.robosh.basestartapplication.receiver
 
-import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Context.NOTIFICATION_SERVICE
 import android.content.Intent
 import android.os.Build
-import android.provider.Settings.Global.getString
+import android.os.Bundle
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.navigation.NavDeepLinkBuilder
 import com.robosh.basestartapplication.BrowseActivity
 import com.robosh.basestartapplication.R
 import com.robosh.basestartapplication.application.INTENT_MOVIE_KEY
-import com.robosh.basestartapplication.model.Movie
 
 
 // TODO BTW: replace constants in xml
@@ -30,18 +26,17 @@ class AlarmNotificationReceiver : BroadcastReceiver() {
     }
 
     override fun onReceive(context: Context, intent: Intent) {
-        Log.d("TAGEERRR", "AlarmNotificationReceiver")
-        Log.d("TAGEERRR", "arguments: ${intent.getBundleExtra(INTENT_MOVIE_KEY+"1")?.getParcelable<Movie>(INTENT_MOVIE_KEY)}")
-        showNotification(context)
+        Log.d("TAGEERRR", "arguments: ${intent.getIntExtra(INTENT_MOVIE_KEY, 0)}")
+        showNotification(context, intent.getIntExtra(INTENT_MOVIE_KEY, 0))
     }
 
-    private fun showNotification(context: Context) {
+    private fun showNotification(context: Context, movieId: Int) {
 
         val pendingIntent = NavDeepLinkBuilder(context)
             .setComponentName(BrowseActivity::class.java)
             .setGraph(R.navigation.navigation_graph)
             .setDestination(R.id.detailsBookNoteFragment)
-//            .setArguments(bundle)
+            .setArguments(Bundle().apply { this.putInt(INTENT_MOVIE_KEY, movieId) })
             .createPendingIntent()
 
 
