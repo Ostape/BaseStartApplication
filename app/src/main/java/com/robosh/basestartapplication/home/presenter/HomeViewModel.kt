@@ -1,6 +1,5 @@
 package com.robosh.basestartapplication.home.presenter
 
-import android.util.Log
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -33,19 +32,13 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-
     @VisibleForTesting
     suspend fun obtainEvent() {
         intentChannel.consumeEach { movieEvent ->
             when (movieEvent) {
-                is MovieEvent.MoviesFetch -> {
-                    Log.d("TAGGERR", getMoviesUseCase.execute().toString())
-                    _state.value = getMoviesUseCase.execute()
-                }
-//                is BookNoteEvent.BookNoteClicked -> {
-//                    _state.value = BookNoteState.BookNoteClickedState(bookNoteEvent.bookNote)
-//                }
-//                is BookNoteEvent.BookNoteSaved -> Unit
+                is MovieEvent.MoviesFetch -> _state.value = getMoviesUseCase.execute()
+                is MovieEvent.MovieClicked -> _state.value = MovieState.MovieClickedState(movieEvent.movie)
+                is MovieEvent.MovieNotified -> Unit
             }
         }
     }

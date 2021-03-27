@@ -9,6 +9,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -66,13 +68,45 @@ class HomeFragment : Fragment(), MovieClickCallback {
         }
     }
 
+    override fun onMovieRemindClicked(movie: Movie) {
+        homeViewModel.intentChannel.offer(MovieEvent.MovieClicked(movie))
+    }
+
     private fun render(movieState: MovieState) {
         when (movieState) {
-            is MovieState.DataListState -> movieAdapter.setData(movieState.data)
+            is MovieState.DataListState -> showMoviesData(movieState)
+            MovieState.Idle -> Unit
+            MovieState.LoadingState -> showLoader()
+            is MovieState.ErrorState -> showError()
+            is MovieState.SingleDataState -> Unit
+            is MovieState.MovieClickedState -> movieClicked(movieState.movie)
         }
     }
 
-    override fun onMovieRemindClicked(movie: Movie) {
+    private fun showMoviesData(movieState: MovieState.DataListState) {
+        hideLoader()
+        binding.listOfMoviesRecyclerView.visibility = VISIBLE
+        movieAdapter.setData(movieState.data)
+    }
+
+    private fun showLoader() {
+        with(binding) {
+            progressBar.visibility = VISIBLE
+            errorMessageMovies.visibility = GONE
+            listOfMoviesRecyclerView.visibility = GONE
+        }
+    }
+
+    private fun hideLoader() {
+        binding.progressBar.visibility = GONE
+    }
+
+    private fun showError() {
+        hideLoader()
+        binding.errorMessageMovies.visibility = VISIBLE
+    }
+
+    private fun movieClicked(movie: Movie) {
         val instance = Calendar.getInstance()
         instance.set(Calendar.MINUTE, instance.get(Calendar.MINUTE))
         instance.set(Calendar.SECOND, instance.get(Calendar.SECOND) + 10)

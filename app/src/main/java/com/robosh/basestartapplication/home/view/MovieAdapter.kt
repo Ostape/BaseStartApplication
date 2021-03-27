@@ -8,21 +8,21 @@ class MovieAdapter(
     private val clickListener: MovieClickListenerFactory
 ) : RecyclerView.Adapter<MovieViewHolder>() {
 
-    private val photos = ArrayList<Movie>()
+    private val movies = ArrayList<Movie>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         return MovieViewHolder.create(parent, clickListener)
     }
 
-    override fun getItemCount() = photos.size
+    override fun getItemCount() = movies.size
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bind(photos[position])
+        holder.bind(movies[position])
     }
 
     fun setData(list: List<Movie>) {
-        photos.clear()
-        photos.addAll(list)
+        movies.clear()
+        movies.addAll(list)
         notifyDataSetChanged()
     }
 }
