@@ -1,1 +1,2 @@
 # BaseStartApplication
+new line
