@@ -5,7 +5,7 @@ pipeline {
             steps {
               withGradle {
                 sh 'chmod +x ./gradlew'
-                sh './gradlew test'
+                sh './gradlew ktlintCheck'
               }
             }
         }
