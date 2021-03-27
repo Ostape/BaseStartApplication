@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailsBookNoteFragment"
-        android:name="com.robosh.basestartapplication.detail.DetailFragment"
+        android:name="com.robosh.basestartapplication.detail.view.DetailFragment"
         android:label="DetailsBookNoteFragment"
         app:enterAnim="@anim/slide_in_to_right"
         app:exitAnim="@anim/slide_out_to_left"
