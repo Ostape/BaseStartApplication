@@ -1,6 +1,5 @@
 package com.robosh.basestartapplication.detail.presenter
 
-import android.util.Log
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -40,10 +39,8 @@ class DetailViewModel @Inject constructor(
                 is MovieEvent.MovieNotified -> {
                     _state.value = getOneMovieUseCase.execute(movieEvent.id)
                 }
-//                is BookNoteEvent.BookNoteClicked -> {
-//                    _state.value = BookNoteState.BookNoteClickedState(bookNoteEvent.bookNote)
-//                }
-//                is BookNoteEvent.BookNoteSaved -> Unit
+                is MovieEvent.MovieClicked -> Unit
+                is MovieEvent.MoviesFetch -> Unit
             }
         }
     }

@@ -1,9 +1,10 @@
 package com.robosh.basestartapplication.detail.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -48,13 +49,41 @@ class DetailFragment : Fragment() {
 
     private fun render(movieState: MovieState) {
         when (movieState) {
-            is MovieState.SingleDataState -> {
-                binding.detailMovieDescription.text = movieState.movie.description
-                Picasso.get().load(MovieDbApi.IMAGE_BASE_URL + movieState.movie.posterUrl)
-                    .into(binding.detailMovieImage)
-                binding.detailMovieTitle.text = movieState.movie.title
-            }
+            is MovieState.SingleDataState -> displayMovie(movieState)
+            MovieState.Idle -> Unit
+            MovieState.LoadingState -> displayLoader()
+            is MovieState.ErrorState -> displayError(movieState)
+            is MovieState.DataListState -> Unit
+            is MovieState.MovieClickedState -> Unit
         }
     }
 
+    private fun displayLoader() {
+        with(binding) {
+            progressBar.visibility = VISIBLE
+            detailMovieContent.visibility = GONE
+            errorTextView.visibility = GONE
+        }
+    }
+
+    private fun hideLoader() {
+        binding.progressBar.visibility = GONE
+    }
+
+    private fun displayMovie(movieState: MovieState.SingleDataState) {
+        hideLoader()
+        with(binding) {
+            detailMovieContent.visibility = VISIBLE
+            detailMovieDescription.text = movieState.movie.description
+            Picasso.get().load(MovieDbApi.IMAGE_BASE_URL + movieState.movie.posterUrl)
+                .into(detailMovieImage)
+            detailMovieTitle.text = movieState.movie.title
+        }
+    }
+
+    private fun displayError(movieState: MovieState.ErrorState) {
+        hideLoader()
+        binding.errorTextView.visibility = VISIBLE
+        binding.errorTextView.text = movieState.data
+    }
 }
