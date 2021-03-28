@@ -3,15 +3,12 @@ pipeline {
     stages {
         stage('Ktlint') {
             steps {
-              withGradle {
-                sh 'chmod +x ./gradlew'
-                sh './gradlew ktlintCheck'
-              }
+                echo 'Hello'
             }
         }
         post {
             always {
-                emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
+            echo 'world!'
             }
         }
     }
