@@ -9,12 +9,9 @@ pipeline {
               }
             }
         }
-        stage('Tests') {
-            steps {
-              withGradle {
-                sh 'chmod +x ./gradlew'
-                sh './gradlew test'
-              }
+        post {
+            always {
+                emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
             }
         }
     }
