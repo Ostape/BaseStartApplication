@@ -1,15 +1,15 @@
 pipeline {
     agent any
     stages {
-        stage('Ktlint') {
+        stage('Ok') {
             steps {
-                echo 'Hello'
+                echo "Ok"
             }
         }
-        post {
-            always {
-            echo 'world!'
-            }
+    }
+    post {
+        always {
+            emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
         }
     }
 }
