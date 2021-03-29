@@ -1,9 +1,20 @@
 pipeline {
     agent any
     stages {
-        stage('Ok') {
+        stage('Ktlint') {
             steps {
-                echo "Ok"
+              withGradle {
+                sh 'chmod +x ./gradlew'
+                sh './gradlew ktlintCheck'
+              }
+            }
+        }
+        stage('Tests') {
+            steps {
+              withGradle {
+                sh 'chmod +x ./gradlew'
+                sh './gradlew test'
+              }
             }
         }
     }
