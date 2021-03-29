@@ -2,7 +2,6 @@ package com.robosh.basestartapplication.home.view
 
 import android.view.View
 import com.robosh.basestartapplication.model.Movie
-import javax.inject.Inject
 
 class MovieClickListenerFactoryImpl constructor(
     private val callback: MovieClickCallback
