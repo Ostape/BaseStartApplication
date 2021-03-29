@@ -2,7 +2,6 @@ package com.robosh.basestartapplication.net.model
 
 import com.google.gson.annotations.SerializedName
 
-
 data class MovieResponse(
     @SerializedName("id")
     val id: Int,

@@ -17,7 +17,6 @@ import com.robosh.basestartapplication.BrowseActivity
 import com.robosh.basestartapplication.R
 import com.robosh.basestartapplication.application.INTENT_MOVIE_KEY
 
-
 class AlarmNotificationReceiver : BroadcastReceiver() {
 
     private companion object {
