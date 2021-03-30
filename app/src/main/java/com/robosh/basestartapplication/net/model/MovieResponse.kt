@@ -1,6 +1,8 @@
 package com.robosh.basestartapplication.net.model
 
 import com.google.gson.annotations.SerializedName
+import javax.annotation.Nullable
+
 
 data class MovieResponse(
     @SerializedName("id")
