@@ -9,11 +9,8 @@ import kotlinx.coroutines.launch
 class HomeViewModel(private val pokemonRepository: PokemonRepository) : ViewModel() {
 
     fun aaaaa() {
-        Log.d("TAGGERR", "asdasdas")
-
         viewModelScope.launch {
             pokemonRepository.getPokemonsReference().isSuccessful
-            Log.d("TAGGERR", pokemonRepository.getPokemonsReference().body().toString())
         }
     }
 }
